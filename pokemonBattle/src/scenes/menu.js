@@ -78,6 +78,7 @@ export default function() {
 
     // Cuando el usuario presione la tecla de espacio, inicia el juego con el personaje seleccionado
     onKeyPress("space", () => {
+        console.log(pokemons[pokemonIndex].name)
         go("game", pokemons[pokemonIndex]);
     });
 }
