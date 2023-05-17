@@ -5,7 +5,15 @@ const pokemons = [
     { name: 'Pikachu', sprite: 'pikachu' },
     { name: 'Charizard', sprite: 'charizard' },
     { name: 'Venusaur', sprite: 'venusaur' },
+    { name: 'Blastoise', sprite: 'blastoise' },
 ];
+
+const backPokemon = [
+    { name: 'BackPikachu', sprite: 'backPikachu' },
+    { name: 'BackCharizard', sprite: 'backCharizard' },
+    { name: 'BackVenusaur', sprite: 'backVenusaur' },
+    { name: 'BackBlastoise', sprite: 'backBlastoise' },
+]
 
 // Define un índice para la selección de personajes
 let pokemonIndex = 0;
@@ -37,7 +45,7 @@ export default function() {
         add([
             sprite(pokemons[pokemonIndex].sprite),
             pos(width() / 2 - 10, height() / 3),
-            scale(2.2), // Un poco más grande
+            scale(2.2), 
             'pokemon'
         ]);
 
@@ -87,7 +95,7 @@ export default function() {
         console.log(pokemons[pokemonIndex].name)
         console.log("Oponente: ")
         console.log(pokemons[opponentIndex].name)
-        go("game", pokemons[pokemonIndex]);
-        // go("game", pokemons[pokemonIndex], pokemons[opponentIndex]);
+        // go("game", pokemons[pokemonIndex]);
+        go("game", backPokemon[pokemonIndex], pokemons[opponentIndex]);
     });
 }

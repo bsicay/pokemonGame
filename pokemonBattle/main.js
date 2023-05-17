@@ -15,9 +15,16 @@ let bgImage = await loadSprite("background", "https://www.paulwheeler.us/files/w
 
 // Carga tus sprites
 loadSprite('pikachu', './src/assets/sprites/pikachu.png');
+loadSprite('backPikachu', './src/assets/sprites/backPikachu.png');
 loadSprite('charizard', './src/assets/sprites/charizard.png');
+loadSprite('backCharizard', './src/assets/sprites/backCharizard.png');
 loadSprite('venusaur', './src/assets/sprites/venusaur.png');
+loadSprite('backVenusaur', './src/assets/sprites/backVenusaur.png');
+loadSprite('blastoise', './src/assets/sprites/blastoise.png');
+loadSprite('backBlastoise', './src/assets/sprites/backBlastoise.png');
 loadSprite('background', './src/assets/background.png');
+loadSprite('battleBackground', './src/assets/battleBackground.png');
+
 
 scene("menu", menuScene);
 scene("game", gameScene);
