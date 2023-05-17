@@ -14,8 +14,9 @@ setBackground(Color.fromHex('#554981'))
 let bgImage = await loadSprite("background", "https://www.paulwheeler.us/files/windows-95-desktop-background.jpg");
 
 // Carga tus sprites
+
 loadSprite('pikachu', './src/assets/sprites/pikachu.png');
-loadSprite('backPikachu', './src/assets/sprites/backPikachu.png');
+loadSprite('backPikachu', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/25.png');
 loadSprite('charizard', './src/assets/sprites/charizard.png');
 loadSprite('backCharizard', './src/assets/sprites/backCharizard.png');
 loadSprite('venusaur', './src/assets/sprites/venusaur.png');
