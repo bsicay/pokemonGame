@@ -1,19 +1,23 @@
-// Importa Kaboom
 import kaboom from "kaboom";
 
-// Importa tus escenas
 import menuScene from "./src/scenes/menu.js";
 import gameScene from "./src/scenes/game.js";
 
-// Inicializa Kaboom
-kaboom();
+kaboom({
+  width: 1280,
+  height: 720,
+  fullscreen: true ,
+  // letterbox: true,
+  stretch: true
+});
+let bgImage = await loadSprite("background", "https://www.paulwheeler.us/files/windows-95-desktop-background.jpg");
 
 // Carga tus sprites
 loadSprite('pikachu', './src/assets/sprites/pikachu.png');
 loadSprite('charizard', './src/assets/sprites/charizard.png');
-// Carga más sprites aquí...
+loadSprite('venusaur', './src/assets/sprites/venusaur.png');
 
-// Define tus escenas
+
 scene("menu", menuScene);
 scene("game", gameScene);
 
