@@ -1,9 +1,21 @@
-import kaboom from 'kaboom'
+// Importa Kaboom
+import kaboom from "kaboom";
 
-kaboom({
-  width: 1280,
-  height: 720,
-  scale: 0.7
-})
+// Importa tus escenas
+import menuScene from "./src/scenes/menu.js";
+import gameScene from "./src/scenes/game.js";
 
-setBackground(Color.fromHex('#36A6E0'))
+// Inicializa Kaboom
+kaboom();
+
+// Carga tus sprites
+loadSprite('pikachu', './src/assets/sprites/pikachu.png');
+loadSprite('charizard', './src/assets/sprites/charizard.png');
+// Carga más sprites aquí...
+
+// Define tus escenas
+scene("menu", menuScene);
+scene("game", gameScene);
+
+// Comienza en la escena del menú
+go("menu");
