@@ -1,12 +1,10 @@
-// Importa Kaboom
+
 import kaboom from "kaboom";
 
-// Define tus personajes de Pokémon
 const pokemons = [
     { name: 'Pikachu', sprite: 'pikachu' },
     { name: 'Charizard', sprite: 'charizard' },
     { name: 'Venusaur', sprite: 'venusaur' },
-    // Añade más personajes aquí...
 ];
 
 // Define un índice para la selección de personajes
@@ -18,7 +16,12 @@ export default function() {
     const updateDisplay = () => {
         // Limpia la pantalla
         destroyAll();
-
+        // add([
+        //     sprite('background'),
+        //     pos(80, 0),
+        //     'background', 
+        //     scale(0.69)
+        // ]);
         // Encuentra el índice del Pokémon a la izquierda y a la derecha
         const leftIndex = (pokemonIndex - 1 + pokemons.length) % pokemons.length;
         const rightIndex = (pokemonIndex + 1) % pokemons.length;
