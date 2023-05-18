@@ -2,6 +2,8 @@ import kaboom from "kaboom";
 
 import menuScene from "./src/scenes/menu.js";
 import gameScene from "./src/scenes/game.js";
+import { PokemonList } from './src/api/api.js';
+
 
 kaboom({
   global: true,
@@ -12,6 +14,27 @@ kaboom({
 });
 setBackground(Color.fromHex('#554981'))
 let bgImage = await loadSprite("background", "https://www.paulwheeler.us/files/windows-95-desktop-background.jpg");
+
+PokemonList()
+  .then(pokemonArray => {
+    // Aquí puedes usar el pokemonArray como lo necesites
+    const frontPokemons = pokemonArray.map(pokemon => [pokemon.name, pokemon.frontDefault]);
+    const backPokemons = pokemonArray.map(pokemon => ['back'+pokemon.name , pokemon.backDefault]);
+    
+    frontPokemons.map( pokemon =>{
+      loadSprite(pokemon[0],pokemon[1]);
+    });
+    backPokemons.map( pokemon =>{
+      loadSprite(pokemon[0],pokemon[1]);
+    });
+    // console.log('Front Pokemons:', frontPokemons);
+    // console.log('Back Pokemons:', backPokemons);
+
+    //console.log(pokemonArray);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+});
 
 // Carga tus sprites
 

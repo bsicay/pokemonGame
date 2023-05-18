@@ -1,22 +1,33 @@
 
 import kaboom from "kaboom";
+import { PokemonList } from '../../src/api/api.js';
 
-const pokemons = [
-    { name: 'Pikachu', sprite: 'pikachu' },
-    { name: 'Charizard', sprite: 'charizard' },
-    { name: 'Venusaur', sprite: 'venusaur' },
-    { name: 'Blastoise', sprite: 'blastoise' },
-];
+let pokemons =[];
+let backPokemon =[];
+let spritesLoaded = false;
 
-const backPokemon = [
-    { name: 'BackPikachu', sprite: 'backPikachu' },
-    { name: 'BackCharizard', sprite: 'backCharizard' },
-    { name: 'BackVenusaur', sprite: 'backVenusaur' },
-    { name: 'BackBlastoise', sprite: 'backBlastoise' },
-]
+PokemonList()
+ .then(pokemonArray => {
+   pokemons = pokemonArray.map(pokemon => ({
+     name: pokemon.name,
+     sprite: pokemon.name
+   }));
+   backPokemon = pokemonArray.map(pokemon => ({
+     name: 'back' + pokemon.name,
+     sprite: 'back' + pokemon.name
+   })); 
+   console.log(pokemons[0].sprite);
+   spritesLoaded = true;
+ })
+ .catch(error => {
+   console.error('Error:', error);
+ }); 
+
 
 // Define un índice para la selección de personajes
 let pokemonIndex = 0;
+let leftIndex = 150;
+let rightIndex = 1;
 
 // Exporta la escena del menú
 export default function() {
@@ -24,45 +35,52 @@ export default function() {
     const updateDisplay = () => {
         // Limpia la pantalla
         destroyAll();
-        // add([
-        //     sprite('background'),
-        //     pos(80, 0),
-        //     'background', 
-        //     scale(0.69)
-        // ]);
-        // Encuentra el índice del Pokémon a la izquierda y a la derecha
-        const leftIndex = (pokemonIndex - 1 + pokemons.length) % pokemons.length;
-        const rightIndex = (pokemonIndex + 1) % pokemons.length;
-
+      
+        if(pokemonIndex==0){
+            leftIndex = 150;
+            rightIndex = 1;
+        }else if (pokemonIndex == 150){
+            leftIndex = 149;
+            rightIndex = 0;
+        }else{
+            leftIndex = pokemonIndex -1;
+            rightIndex = pokemonIndex +1;
+        }
+        if(spritesLoaded){
+            add([
+                sprite(pokemons[leftIndex].sprite),
+                pos(width() / 2 - 150, height() / 3),
+                'pokemon'
+            ]);
+            // Muestra el Pokémon seleccionado
+            add([
+                sprite(pokemons[pokemonIndex].sprite),
+                pos(width() / 2 - 10, height() / 3),
+                scale(2.2), 
+                'pokemon'
+            ]);
+            // Muestra el Pokémon a la derecha
+            add([
+                sprite(pokemons[rightIndex].sprite),
+                pos(width() / 2 + 150, height() / 3),   
+                'pokemon'
+            ]);
+            // Añade texto para mostrar el nombre del Pokémon seleccionado
+            add([
+                text(pokemons[pokemonIndex].name),
+                pos(width() / 2 - 40, height() / 3 + 150),
+            ]);
+        }else{
+            add([
+                text("Cargando sprites..."),
+                pos(width()/2, height() / 2),
+                color(1, 1, 1),
+            ]);
+            
+        }
         // Muestra el Pokémon a la izquierda
-        add([
-            sprite(pokemons[leftIndex].sprite),
-            pos(width() / 2 - 150, height() / 3),
-            'pokemon'
-        ]);
-
-        // Muestra el Pokémon seleccionado
-        add([
-            sprite(pokemons[pokemonIndex].sprite),
-            pos(width() / 2 - 10, height() / 3),
-            scale(2.2), 
-            'pokemon'
-        ]);
-
-        // Muestra el Pokémon a la derecha
-        add([
-            sprite(pokemons[rightIndex].sprite),
-            pos(width() / 2 + 150, height() / 3),   
-            'pokemon'
-        ]);
-
-        // Añade texto para mostrar el nombre del Pokémon seleccionado
-        add([
-            text(pokemons[pokemonIndex].name),
-            pos(width() / 2 - 40, height() / 3 + 150),
-        ]);
+        
     };
-
     // Actualiza la pantalla inicialmente
     updateDisplay();
 
