@@ -11,14 +11,14 @@ export default function(pokemon, opponent) {
 
     let player = add([
         sprite(pokemon.sprite),
-        pos(500, 450),
-        scale(2.9), 
+        pos(400, 320),
+        scale(3.5), 
         'player'
     ]);
 
     let secondPlayer = add([
         sprite(opponent.sprite),
-        pos(1100, 150),
+        pos(1100, 70),
         scale(2.2), 
         'opponent'
     ]);

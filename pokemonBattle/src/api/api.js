@@ -1,3 +1,4 @@
+
 export async function PokemonList() {
     try {
         const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
@@ -17,7 +18,7 @@ export async function PokemonList() {
             };
           })
         );
-        console.log(pokemonArray);
+        //console.log(pokemonArray);
         return pokemonArray;
       } catch (error) {
         throw new Error('Error fetching Pokemon list:', error);

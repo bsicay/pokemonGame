@@ -15,37 +15,15 @@ kaboom({
 setBackground(Color.fromHex('#554981'))
 let bgImage = await loadSprite("background", "https://www.paulwheeler.us/files/windows-95-desktop-background.jpg");
 
-PokemonList()
-  .then(pokemonArray => {
-    // Aquí puedes usar el pokemonArray como lo necesites
-    const frontPokemons = pokemonArray.map(pokemon => [pokemon.name, pokemon.frontDefault]);
-    const backPokemons = pokemonArray.map(pokemon => ['back'+pokemon.name , pokemon.backDefault]);
-    
-    frontPokemons.map( pokemon =>{
-      console.log(pokemon[0],pokemon[1]);
-      loadSprite(pokemon[0],pokemon[1]);
-    });
-    backPokemons.map( pokemon =>{
-      loadSprite(pokemon[0],pokemon[1]);
-    });
-   
-  })
-  .catch(error => {
-    console.error('Error:', error);
-});
+const pokemons = await PokemonList();
 
-// Carga tus sprites
+pokemons.forEach(pokemon =>{
+  loadSprite(pokemon.name, pokemon.frontDefault)
+  loadSprite('back'+pokemon.name, pokemon.backDefault)
+})
 
-// loadSprite('pikachu', './src/assets/sprites/pikachu.png');
-// loadSprite('backPikachu', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/25.png');
-// loadSprite('charizard', './src/assets/sprites/charizard.png');
-// loadSprite('backCharizard', './src/assets/sprites/backCharizard.png');
-// loadSprite('venusaur', './src/assets/sprites/venusaur.png');
-// loadSprite('backVenusaur', './src/assets/sprites/backVenusaur.png');
-// loadSprite('blastoise', './src/assets/sprites/blastoise.png');
-// loadSprite('backBlastoise', './src/assets/sprites/backBlastoise.png');
-// loadSprite('background', './src/assets/background.png');
-// loadSprite('battleBackground', './src/assets/battleBackground.png');
+
+loadSprite('battleBackground', './src/assets/battleBackground.png');
 
 
 scene("menu", menuScene);

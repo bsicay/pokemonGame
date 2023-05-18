@@ -1,7 +1,8 @@
 
 import kaboom from "kaboom";
-import { PokemonList } from '../../src/api/api.js';
 
+
+// Arreglo con los pokemons y sus sprites
 const pokemons =[
     {name: "Bulbasaur", sprite: "bulbasaur"},
     {name: "Ivysaur", sprite: "ivysaur"},
@@ -153,30 +154,12 @@ const pokemons =[
     {name: "Dragonair", sprite: "dragonair"},
     {name: "Dragonite", sprite: "dragonite"},
     {name: "Mewtwo", sprite: "mewtwo"},
-    {name: "mew", sprite: "mew"}
+    {name: "Mew", sprite: "mew"},
 ];
-let backPokemon =[];
+const backPokemon = pokemons.map(pokemon =>{
+    return {name: 'back'+pokemon.name, sprite: 'back'+pokemon.sprite}
+});
 
-
-
-// async function loadPokemons() {
-//     try {
-//       const pokemonArray = await PokemonList();
-//       pokemons = pokemonArray.map(pokemon => ({
-//         name: pokemon.name,
-//         sprite: pokemon.name
-//       }));
-//       backPokemon = pokemonArray.map(pokemon => ({
-//         name: 'back' + pokemon.name,
-//         sprite: 'back' + pokemon.name
-//       }));
-//       console.log(pokemons[0].sprite);
-//       spritesLoaded = true;
-//     } catch (error) {
-//       console.error('Error:', error);
-//     }
-//   }
-//   loadPokemons();
   
 // Define un índice para la selección de personajes
 let pokemonIndex = 0;
@@ -195,34 +178,35 @@ export default function() {
             leftIndex = 150;
             rightIndex = 1;
         }else if (pokemonIndex == 150){
-            leftIndex = 149;
+            leftIndex = 150;
             rightIndex = 0;
         }else{
             leftIndex = pokemonIndex -1;
             rightIndex = pokemonIndex +1;
         }
+        // Muestra el Pokémon a la izquierda
         add([
             sprite(pokemons[leftIndex].sprite),
-            pos(width() / 2 - 150, height() / 3),
+            pos(width() / 2 -200, height() / 3),
             'pokemon'
         ]);
         // Muestra el Pokémon seleccionado
         add([
             sprite(pokemons[pokemonIndex].sprite),
-            pos(width() / 2 - 10, height() / 3),
+            pos(width() / 2 - 50, height() / 3),
             scale(2.2), 
             'pokemon'
         ]);
         // Muestra el Pokémon a la derecha
         add([
             sprite(pokemons[rightIndex].sprite),
-            pos(width() / 2 + 150, height() / 3),   
+            pos(width() / 2 + 200, height() / 3),   
             'pokemon'
         ]);
         // Añade texto para mostrar el nombre del Pokémon seleccionado
         add([
             text(pokemons[pokemonIndex].name),
-            pos(width() / 2 - 40, height() / 3 + 150),
+            pos(width() / 2 - 40, height() / 3 + 200),
         ]);
        
         // Muestra el Pokémon a la izquierda
