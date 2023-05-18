@@ -17,6 +17,7 @@ export async function PokemonList() {
             };
           })
         );
+        console.log(pokemonArray);
         return pokemonArray;
       } catch (error) {
         throw new Error('Error fetching Pokemon list:', error);
