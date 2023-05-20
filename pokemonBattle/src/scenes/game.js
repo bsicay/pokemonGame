@@ -1,7 +1,21 @@
 import kaboom from "kaboom";
+import { StatsPokemon } from "../api/api";
 
-export default function(pokemon, opponent) {
-
+export default async function(pokemon, opponent) {
+    /*
+    primera stats: hp
+    segunda stats: attack
+    tercera stats: defense
+    cuarta stats: special-attack
+    quinta stats: special-defense
+    sexta stats: speed
+    */
+    console.log(pokemon.name)
+    const statsPokemon = await StatsPokemon(pokemon.name)
+    console.log(statsPokemon)
+    console.log(opponent.name)
+    const statsOpponent = await StatsPokemon(opponent.name)
+    console.log(statsOpponent)
     add([
             sprite('battleBackground'),
             pos(100, 0),

@@ -24,4 +24,17 @@ export async function PokemonList() {
         throw new Error('Error fetching Pokemon list:', error);
       }
 }
-  
+
+export async function StatsPokemon(name){
+  try{
+    const url = 'https://pokeapi.co/api/v2/pokemon/' + name + '/';
+    const response = await fetch(url);
+    const pokemonData = await response.json();
+    const stats = pokemonData.stats;
+    const finalStats = stats.map(stat => stat.base_stat);
+    return(finalStats)
+
+  }catch(error){
+    throw new Error('Error fetching Pokemon list:', error);
+  }
+}

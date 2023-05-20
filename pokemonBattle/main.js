@@ -18,6 +18,7 @@ let bgImage = await loadSprite("background", "https://www.paulwheeler.us/files/w
 const pokemons = await PokemonList();
 
 pokemons.forEach(pokemon =>{
+  //console.log(pokemon.name);
   loadSprite(pokemon.name, pokemon.frontDefault)
   loadSprite('back'+pokemon.name, pokemon.backDefault)
 })
