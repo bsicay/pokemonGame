@@ -43,7 +43,7 @@ export default async function(pokemon, opponent) {
     ]);
     add([
         text(opponent.name, 32),
-        pos(width()/15, 40),
+        pos(width()/15 + 10, 40),
         color(0, 0, 0), // Cambia el color del texto a negro (RGB: 0, 0, 0)
     ]);
     
