@@ -173,6 +173,13 @@ export default function() {
         
         // Limpia la pantalla
         destroyAll();
+
+        add([
+            sprite('background'),
+            pos(80, 0),
+            'background', 
+            scale(0.69)
+        ]);
       
         if(pokemonIndex==0){
             leftIndex = 150;
@@ -189,26 +196,29 @@ export default function() {
         // Muestra el Pokémon a la izquierda
         add([
             sprite(pokemons[leftIndex].sprite),
-            pos(width() / 2 -200, height() / 3),
+            pos(width() / 2 - 600, height() / 3),
+            scale(2.7), 
             'pokemon'
         ]);
         // Muestra el Pokémon seleccionado
         add([
             sprite(pokemons[pokemonIndex].sprite),
-            pos(width() / 2 - 50, height() / 3),
-            scale(2.2), 
+            pos(width() / 2 - 200, height() / 4),
+            scale(4), 
             'pokemon'
         ]);
         // Muestra el Pokémon a la derecha
         add([
             sprite(pokemons[rightIndex].sprite),
-            pos(width() / 2 + 200, height() / 3),   
+            pos(width() / 2 + 300, height() / 3), 
+            scale(2.7),   
             'pokemon'
-        ]);
+        ]); 
         // Añade texto para mostrar el nombre del Pokémon seleccionado
         add([
-            text(pokemons[pokemonIndex].name),
-            pos(width() / 2 - 40, height() / 3 + 200),
+            text(pokemons[pokemonIndex].name.toUpperCase()),
+            pos(width() / 2 - 210, height() / 3 + 400),
+            color(0, 0, 0),
         ]);
        
         // Muestra el Pokémon a la izquierda

@@ -13,8 +13,6 @@ kaboom({
   clearColor: [0, 0, 0, 1],
 });
 setBackground(Color.fromHex('#554981'))
-let bgImage = await loadSprite("background", "https://www.paulwheeler.us/files/windows-95-desktop-background.jpg");
-
 const pokemons = await PokemonList();
 
 pokemons.forEach(pokemon =>{
@@ -23,7 +21,7 @@ pokemons.forEach(pokemon =>{
   loadSprite('back'+pokemon.name, pokemon.backDefault)
 })
 
-
+loadSprite('background', './src/assets/backgroundSelect.png');
 loadSprite('battleBackground', './src/assets/battleBackground.png');
 
 
