@@ -163,8 +163,8 @@ const backPokemon = pokemons.map(pokemon =>{
   
 // Define un índice para la selección de personajes
 let pokemonIndex = 0;
-let leftIndex = 150;
-let rightIndex = 1;
+// let leftIndex = 150;
+// let rightIndex = 1;
 
 // Exporta la escena del menú
 export default function() {
@@ -174,23 +174,15 @@ export default function() {
         // Limpia la pantalla
         destroyAll();
 
+        const leftIndex = (pokemonIndex - 1 + pokemons.length) % pokemons.length;
+        const rightIndex = (pokemonIndex + 1) % pokemons.length;
+
         add([
             sprite('background'),
             pos(80, 0),
             'background', 
             scale(0.69)
         ]);
-      
-        if(pokemonIndex==0){
-            leftIndex = 150;
-            rightIndex = 1;
-        }else if (pokemonIndex == 150){
-            leftIndex = 150;
-            rightIndex = 0;
-        }else{
-            leftIndex = pokemonIndex -1;
-            rightIndex = pokemonIndex +1;
-        }
 
         
         // Muestra el Pokémon a la izquierda
