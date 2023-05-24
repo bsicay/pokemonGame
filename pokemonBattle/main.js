@@ -1,18 +1,20 @@
 import kaboom from "kaboom";
 
-import menuScene from "./src/scenes/menu.js";
+import characterSelectorScene from "./src/scenes/characterSelector.js";
 import gameScene from "./src/scenes/game.js";
+import menuScene from "./src/scenes/menu.js";
 import { PokemonList } from './src/api/api.js';
 
 
-kaboom({
+export const k = kaboom({
   global: true,
   scaleMode: "stretch",
-  // fullscreen: true,
+  fullscreen: true,
   // scale: 1,
   debug: true,
   clearColor: [0, 0, 0, 1],
 });
+
 setBackground(Color.fromHex('#554981'))
 const pokemons = await PokemonList();
 
@@ -26,8 +28,12 @@ loadSprite('background', './src/assets/backgroundSelect.png');
 loadSprite('battleBackground', './src/assets/battleBackground.png');
 
 
+scene('characterSelector', (worldState) => characterSelectorScene(worldState))
+// scene('game', (worldState) => gameScene(worldState))  
+
 scene("menu", menuScene);
+// scene("characterSelector", characterSelectorScene);
 scene("game", gameScene);
 
 // Comienza en la escena del menú
-go("menu");
+go("characterSelector");
