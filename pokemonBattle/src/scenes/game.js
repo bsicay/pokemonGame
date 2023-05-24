@@ -73,11 +73,32 @@ export default async function(pokemon, opponent) {
         (val) => player.pos.x = val, 
         easings.easeInSine
     )
-    add([
-        text(pokemon.name, 32),
-        pos(width() / 2 + 450, height()/2+7),
-        color(0, 0, 0), // Cambia el color del texto a negro (RGB: 0, 0, 0)
-    ]);
+    
+    const playernHealthBox = add([
+        rect(400, 100),
+        outline(4),
+        pos(1100, 500) 
+     ])
+
+     playernHealthBox.add([
+        text(pokemon.name.toUpperCase(), {size: 32}),
+        color(10,10,10),
+        pos(10, 10)
+    ])
+
+    playernHealthBox.add([
+        rect(370, 10),
+        color(200,200,200),
+        pos(15, 50)
+    ])
+
+    const playernHealthBar = playernHealthBox.add([
+        rect(370, 10),
+        color(0,200,0),
+        pos(15, 50)
+    ])
+
+    tween(playernHealthBox.pos.x, 950, 0.9, (val) => playernHealthBox.pos.x = val, easings.easeInSine)
 
     let secondPlayer = add([
         sprite(opponent.sprite),
@@ -94,11 +115,31 @@ export default async function(pokemon, opponent) {
         easings.easeInSine
     )
 
-    add([
-        text(opponent.name, 32),
-        pos(width()/15 +10, 40),
-        color(0, 0, 0), // Cambia el color del texto a negro (RGB: 0, 0, 0)
-    ]);
+    const enemyHealthBox = add([
+        rect(400, 100),
+        outline(4),
+        pos(100, 50) 
+    ])
+
+    enemyHealthBox.add([
+        text(opponent.name.toUpperCase(), {size: 32}),
+        color(10,10,10),
+        pos(10, 10)
+    ])
+
+    enemyHealthBox.add([
+        rect(370, 10),
+        color(200,200,200),
+        pos(15, 50)
+    ])
+
+    const enemynHealthBar = enemyHealthBox.add([
+        rect(370, 10),
+        color(0,200,0),
+        pos(15, 50)
+    ])
+
+    tween(enemyHealthBox.pos.x, 300, 0.9, (val) => enemyHealthBox.pos.x = val, easings.easeInSine)
     
 
 }
