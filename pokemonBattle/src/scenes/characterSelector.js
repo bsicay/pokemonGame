@@ -183,17 +183,6 @@ export default function() {
             'background', 
             scale(0.69)
         ]);
-      
-        // if(pokemonIndex==0){
-        //     leftIndex = 150;
-        //     rightIndex = 1;
-        // }else if (pokemonIndex == 150){
-        //     leftIndex = 150;
-        //     rightIndex = 0;
-        // }else{
-        //     leftIndex = pokemonIndex -1;
-        //     rightIndex = pokemonIndex +1;
-        // }
 
         
         // Muestra el Pokémon a la izquierda
