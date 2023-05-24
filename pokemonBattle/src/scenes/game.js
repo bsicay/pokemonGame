@@ -35,6 +35,7 @@ export default async function(pokemon, opponent) {
     const upperRect = add([rect(width(), height() / 2), pos(0, 0), color(0, 0, 0), z(1)]);
     const lowerRect = add([rect(width(), height() / 2), pos(0, height() / 2), color(0, 0, 0), z(1)]);
 
+
     // Animación de los rectángulos
     const duration = 0.2; // Duración de la animación en segundos
     upperRect.onUpdate(() => {
@@ -60,10 +61,18 @@ export default async function(pokemon, opponent) {
 
     let player = add([
         sprite(pokemon.sprite),
-        pos(400, 320),
+        pos(0, 320),
         scale(3.5), 
         'player'
     ]);
+
+    tween(
+        player.pos.x, 
+        400, 
+        0.9, 
+        (val) => player.pos.x = val, 
+        easings.easeInSine
+    )
     add([
         text(pokemon.name, 32),
         pos(width() / 2 + 450, height()/2+7),
@@ -72,10 +81,19 @@ export default async function(pokemon, opponent) {
 
     let secondPlayer = add([
         sprite(opponent.sprite),
-        pos(1100, 70),
+        pos(1400, 70),
         scale(2.2), 
         'opponent'
     ]);
+
+    tween(
+        secondPlayer.pos.x, 
+        1100, 
+        0.9, 
+        (val) => secondPlayer.pos.x = val, 
+        easings.easeInSine
+    )
+
     add([
         text(opponent.name, 32),
         pos(width()/15 +10, 40),
