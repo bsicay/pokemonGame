@@ -17,17 +17,17 @@ export default async function(pokemon, opponent) {
     const statsPokemon = await StatsPokemon(pokemon.name)
     console.log(statsPokemon)
     const typesUser = await GetType(pokemon.name)
-    console.log(typesUser)
+    //console.log(typesUser)
     
     //Segundo pokemon (oponente)
     console.log(opponent.name)
     const statsOpponent = await StatsPokemon(opponent.name)
     console.log(statsOpponent)
     const typesOpponent = await GetType(opponent.name)
-    console.log(typesOpponent)
+    //console.log(typesOpponent)
     
-    let multiplicadorPoke1 = calculadorMultiplicador(typesUser, typesOpponent)
-    let multiplicadorPoke2 = calculadorMultiplicador(typesOpponent, typesUser)
+    let multiplicadorPoke1 = await calculadorMultiplicador(typesUser, typesOpponent)
+    let multiplicadorPoke2 = await calculadorMultiplicador(typesOpponent, typesUser)
 
     console.log("multiplicador de: ", pokemon.name,": ",multiplicadorPoke1)
     console.log("multiplicador de: ", opponent.name,": ",multiplicadorPoke2)
