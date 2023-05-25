@@ -39,18 +39,48 @@ export async function StatsPokemon(name){
   }
 }
 
+// export async function GetType(name){
+//   try{
+//     const url = 'https://pokeapi.co/api/v2/pokemon/' + name + '/';
+//     const response = await fetch(url);
+//     const pokemonData = await response.json();
+//     const type = pokemonData.types;
+//     let finalTypes = []
+//     for(let i = 0; i<type.length; i++){
+//       finalTypes.push(type[i].type.name)
+//     }
+//     return finalTypes
+//   }catch(error){
+//     throw new Error('Error fetching Pokemon list:', error);
+//   }
+// }
+
+
 export async function GetType(name){
-  try{
-    const url = 'https://pokeapi.co/api/v2/pokemon/' + name + '/';
-    const response = await fetch(url);
-    const pokemonData = await response.json();
-    const type = pokemonData.types;
-    let finalTypes = []
-    for(let i = 0; i<type.length; i++){
-      finalTypes.push(type[i].type.name)
+  const maxRetries = 5;
+  const delayBetweenRetriesMS = 2000; // 2 seconds
+  let lastError = null;
+
+  for(let i = 0; i < maxRetries; i++){
+    try{
+      const url = 'https://pokeapi.co/api/v2/pokemon/' + name + '/';
+      const response = await fetch(url);
+      const pokemonData = await response.json();
+      const type = pokemonData.types;
+      let finalTypes = [];
+      for(let j = 0; j < type.length; j++){
+        finalTypes.push(type[j].type.name);
+      }
+      return finalTypes;
+    }catch(error){
+      console.error('Error fetching Pokemon list:', error);
+      lastError = error;
     }
-    return finalTypes
-  }catch(error){
-    throw new Error('Error fetching Pokemon list:', error);
+    
+    // Si llegamos a este punto, ha ocurrido un error, así que esperamos antes de volver a intentarlo.
+    await new Promise(resolve => setTimeout(resolve, delayBetweenRetriesMS));
   }
+  
+  // Si hemos agotado todos los intentos y aún no hemos tenido éxito, lanzamos el último error.
+  throw new Error(`Error after ${maxRetries} attempts: ${lastError}`);
 }
