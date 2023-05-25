@@ -3,20 +3,20 @@ export async function calculadorMultiplicador(pokemon1, pokemon2){
         //fortalezas y debilidades por tipo
         let tipoRelaciones = {
             normal: { weaknesses: [], strengths: [] },
-            fire: { weaknesses: ["water", "rock", "ground"], strengths: ["grass", "ice", "bug", "steel"] },
-            water: { weaknesses: ["electric", "grass"], strengths: ["fire", "rock", "ground"] },
-            electric: { weaknesses: ["ground"], strengths: ["water", "flying"] },
-            grass: { weaknesses: ["fire", "ice", "poison", "flying", "bug"], strengths: ["water", "ground", "rock"] },
-            ice: { weaknesses: ["fire", "fighting", "rock", "steel"], strengths: ["grass", "ground", "flying", "dragon"] },
+            fire: { weaknesses: ["fire","water", "rock", "ground"], strengths: ["grass", "ice", "bug", "steel"] },
+            water: { weaknesses: ["water","electric", "grass"], strengths: ["fire", "rock", "ground"] },
+            electric: { weaknesses: ["electric","ground"], strengths: ["water", "flying"] },
+            grass: { weaknesses: ["grass","fire", "ice", "poison", "flying", "bug"], strengths: ["water", "ground", "rock"] },
+            ice: { weaknesses: ["ice","fire", "fighting", "rock", "steel"], strengths: ["grass", "ground", "flying", "dragon"] },
             fighting: { weaknesses: ["flying", "poison", "psychic", "bug", "fairy"], strengths: ["normal", "ice", "rock", "steel"] },
-            poison: { weaknesses: ["ground", "psychic"], strengths: ["grass", "fairy"] },
-            ground: { weaknesses: ["water", "grass", "ice"], strengths: ["electric", "poison", "fire", "rock", "steel"] },
+            poison: { weaknesses: ["poison","ground", "psychic"], strengths: ["grass", "fairy"] },
+            ground: { weaknesses: ["ground","water", "grass", "ice"], strengths: ["electric", "poison", "fire", "rock", "steel"] },
             flying: { weaknesses: ["electric", "ice", "rock"], strengths: ["grass", "fighting", "bug"] },
-            psychic: { weaknesses: ["bug", "ghost", "dark"], strengths: ["fighting", "poison"] },
-            bug: { weaknesses: ["fire", "flying", "rock"], strengths: ["grass", "psychic", "poison"] },
-            rock: { weaknesses: ["water", "grass", "fighting", "ground", "steel"], strengths: ["fire", "ice", "bug", "flying", "fairy"] },
+            psychic: { weaknesses: ["psychic","bug", "ghost", "dark"], strengths: ["fighting", "poison"] },
+            bug: { weaknesses: ["bug","fire", "flying", "rock"], strengths: ["grass", "psychic", "poison"] },
+            rock: { weaknesses: ["rock","water", "grass", "fighting", "ground", "steel"], strengths: ["fire", "ice", "bug", "flying", "fairy"] },
             ghost: { weaknesses: ["ghost", "dark"], strengths: ["psychic"] },
-            dragon: { weaknesses: ["fairy", "dragon"], strengths: ["dragon"] }
+            dragon: { weaknesses: ["fairy"], strengths: ["dragon"] }
         }
         
 
