@@ -36,12 +36,6 @@ export async function StatsPokemon(name){
     const url = 'https://pokeapi.co/api/v2/pokemon/' + name + '/';
     const response = await fetch(url);
     const pokemonData = await response.json();
-    // const moves = pokemonData.moves;
-    // const detailedMoves = await Promise.all(moves.map(move => getMoveDetails(move.move.url)));
-    // const normalPhysicalMove  = detailedMoves.find(move => 
-    //   move.damage_class.name === 'physical' && move.type.name === 'normal'
-    // );
-    // console.log(normalPhysicalMove )
     const stats = pokemonData.stats;
     const finalStats = stats.map(stat => stat.base_stat);
     return(finalStats)

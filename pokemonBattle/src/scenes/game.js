@@ -28,9 +28,8 @@ export default async function(pokemon, opponent) {
     const statsOpponent = await StatsPokemon(opponent.name)
     console.log(statsOpponent)
     const typesOpponent = await GetType(opponent.name)
-    // const movesOponnent = await getPokemonMoves(opponent.name)
-    // console.log("movimiento2" +  movesOponnent)
-    //console.log(typesOpponent)
+    const movesOpponent = await getPokemonMoves(opponent.name)
+    
     
     let multiplicadorPoke1 = await calculadorMultiplicador(typesUser, typesOpponent)
     let multiplicadorPoke2 = await calculadorMultiplicador(typesOpponent, typesUser)
@@ -41,6 +40,10 @@ export default async function(pokemon, opponent) {
     const upperRect = add([rect(width(), height() / 2), pos(0, 0), color(0, 0, 0), z(1)]);
     const lowerRect = add([rect(width(), height() / 2), pos(0, height() / 2), color(0, 0, 0), z(1)]);
     let selectedMoveIndex = 0;
+    let phase = 'player-selection'
+    let moveNames = moves.map(move => move.name)
+    let opponentMoveNames = movesOpponent.map(move => move.name);
+
 
 
     // Animación de los rectángulos
@@ -197,9 +200,6 @@ export default async function(pokemon, opponent) {
         )
     }
 
-    let phase = 'player-selection'
-    let moveNames = moves.map(move => move.name)
-
     onKeyPress('up', () => {
         selectedMoveIndex = (selectedMoveIndex - 1 + moveNames.length) % moveNames.length;
         if (phase === 'player-selection' || phase === 'player-turn') {
@@ -224,7 +224,11 @@ export default async function(pokemon, opponent) {
         }
 
         if (phase === 'enemy-turn') {
-            content.text = opponent.name.toUpperCase() + ' ha atacado!'
+            content.text = opponent.name.toUpperCase() + ' se prepara para atacar!';
+            // Seleccionar un movimiento al azar de los movimientos disponibles del oponente
+            let selectedOpponentMoveIndex = Math.floor(Math.random() * opponentMoveNames.length);
+            let selectedOpponentMove = opponentMoveNames[selectedOpponentMoveIndex];
+            content.text = opponent.name.toUpperCase() + ' ha usado ' + selectedOpponentMove + '.';
             const damageDealt = Math.random() * 230
 
             if (damageDealt > 150) {
