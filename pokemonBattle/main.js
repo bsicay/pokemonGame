@@ -26,7 +26,7 @@ pokemons.forEach(pokemon =>{
 
 loadSprite('background', './src/assets/backgroundSelect.png');
 loadSprite('battleBackground', './src/assets/battleBackground.png');
-
+loadSound("audio", "./src/assets/sound/audio.mp3");
 
 scene('characterSelector', (worldState) => characterSelectorScene(worldState))
 // scene('game', (worldState) => gameScene(worldState))  

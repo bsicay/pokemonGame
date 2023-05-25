@@ -2,6 +2,8 @@
 import kaboom from "kaboom";
 
 
+
+
 // Arreglo con los pokemons y sus sprites
 const pokemons =[
     {name: "bulbasaur", sprite: "bulbasaur"},
@@ -160,6 +162,11 @@ const backPokemon = pokemons.map(pokemon =>{
     return {name: pokemon.name, sprite: 'back'+pokemon.sprite}
 });
 
+function reproducirAudio() {
+    console.log("HOLA")
+    play("audio");
+}
+
   
 // Define un índice para la selección de personajes
 let pokemonIndex = 0;
@@ -244,6 +251,7 @@ export default function() {
 
     // Cuando el usuario presione la tecla de espacio, inicia el juego con el personaje seleccionado
     onKeyPress("space", () => {
+        reproducirAudio()
         let opponentIndex = Math.floor(Math.random() * pokemons.length);
 
         while (opponentIndex === pokemonIndex) {
