@@ -62,6 +62,11 @@ export default async function(pokemon, opponent) {
         }
     });
 
+    function detenerAudio() {
+        console.log("audio")
+          pause("audio");  
+      }
+
     add([
         sprite('battleBackground'),
         pos(100, 0),

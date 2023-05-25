@@ -1,9 +1,6 @@
 
 import kaboom from "kaboom";
 
-
-
-
 // Arreglo con los pokemons y sus sprites
 const pokemons =[
     {name: "bulbasaur", sprite: "bulbasaur"},
@@ -162,10 +159,19 @@ const backPokemon = pokemons.map(pokemon =>{
     return {name: pokemon.name, sprite: 'back'+pokemon.sprite}
 });
 
+// const music = play("audio", {
+//     volume: 0.8,
+//     loop: true
+// })
+
+let sound = null
+let audioReproduciendose = false;
 function reproducirAudio() {
-    console.log("HOLA")
-    play("audio");
-}
+    if (!audioReproduciendose) {
+      sound = play("audio", { loop: true, volume: 0.8 });
+      audioReproduciendose = true;
+    }
+  }
 
   
 // Define un índice para la selección de personajes
@@ -180,7 +186,11 @@ export default function() {
         
         // Limpia la pantalla
         destroyAll();
-
+        if (sound){
+            sound.volume = 0.0;
+            audioReproduciendose = false;
+        }
+        
         const leftIndex = (pokemonIndex - 1 + pokemons.length) % pokemons.length;
         const rightIndex = (pokemonIndex + 1) % pokemons.length;
 
@@ -251,7 +261,12 @@ export default function() {
 
     // Cuando el usuario presione la tecla de espacio, inicia el juego con el personaje seleccionado
     onKeyPress("space", () => {
-        reproducirAudio()
+        if (audioReproduciendose) {
+            sound.volume = 0.0;
+            audioReproduciendose = false;
+          } else {
+            reproducirAudio();
+          }
         let opponentIndex = Math.floor(Math.random() * pokemons.length);
 
         while (opponentIndex === pokemonIndex) {
