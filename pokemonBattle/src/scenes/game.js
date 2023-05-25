@@ -22,14 +22,13 @@ export default async function(pokemon, opponent) {
     console.log("movimiento " + moves[0].name)
     console.log("movimiento2 " + moves[1].name)
     console.log("movimiento3 " + moves[2].name)
-    
+    console.log("potencia "+ moves[0].power)
     //Segundo pokemon (oponente)
     console.log(opponent.name)
     const statsOpponent = await StatsPokemon(opponent.name)
     console.log(statsOpponent)
     const typesOpponent = await GetType(opponent.name)
     const movesOpponent = await getPokemonMoves(opponent.name)
-    
     
     let multiplicadorPoke1 = await calculadorMultiplicador(typesUser, typesOpponent)
     let multiplicadorPoke2 = await calculadorMultiplicador(typesOpponent, typesUser)
@@ -44,6 +43,14 @@ export default async function(pokemon, opponent) {
     let moveNames = moves.map(move => move.name)
     let opponentMoveNames = movesOpponent.map(move => move.name);
 
+    function calculateDamage(attackerSpecialAttack, movePower, defenderDefense, multiplier, move) {
+        if (move.damage_class.name === "special") {
+            return (attackerSpecialAttack * movePower * multiplier) / defenderDefense;
+        } else {
+            return (attackerSpecialAttack * movePower ) / defenderDefense;
+        }
+        
+    }
 
 
     // Animación de los rectángulos
@@ -61,12 +68,6 @@ export default async function(pokemon, opponent) {
             destroy(lowerRect);  // Destruir el rectángulo inferior cuando llega a su posición final
         }
     });
-
-    function detenerAudio() {
-        console.log("audio")
-          pause("audio");  
-      }
-
     add([
         sprite('battleBackground'),
         pos(100, 0),
@@ -188,9 +189,6 @@ export default async function(pokemon, opponent) {
     }
 
     function makePlayerFlash(pokemon) {
-        console.log("flash")
-        console.log(pokemon)
-        console.log(pokemon.opacity)
         tween(
             pokemon.opacity,
             0,
@@ -230,12 +228,16 @@ export default async function(pokemon, opponent) {
 
         if (phase === 'enemy-turn') {
             content.text = opponent.name.toUpperCase() + ' se prepara para atacar!';
-            // Seleccionar un movimiento al azar de los movimientos disponibles del oponente
+            // Seleccionar un movimiento al azar de los movimientos disponibles del oponente}
             let selectedOpponentMoveIndex = Math.floor(Math.random() * opponentMoveNames.length);
             let selectedOpponentMove = opponentMoveNames[selectedOpponentMoveIndex];
             content.text = opponent.name.toUpperCase() + ' ha usado ' + selectedOpponentMove + '.';
-            const damageDealt = Math.random() * 230
-
+            const damageDealt = calculateDamage(statsOpponent[3], movesOpponent[1].power, statsPokemon[2], multiplicadorPoke2, movesOpponent[selectedOpponentMoveIndex])
+            console.log(statsOpponent[3])
+            console.log(movesOpponent[selectedOpponentMoveIndex].power)
+            console.log(statsPokemon[2])
+            console.log(multiplicadorPoke2)
+            console.log(damageDealt)
             if (damageDealt > 150) {
                 content.text = "Golpe crítico!"
             }
@@ -248,7 +250,12 @@ export default async function(pokemon, opponent) {
         }
 
         if (phase === 'player-turn') {
-            const damageDealt = Math.random() * 230
+            const damageDealt = calculateDamage(statsPokemon[3],  moves[1].power, statsOpponent[2], multiplicadorPoke1, moves[selectedMoveIndex])
+            console.log("daño " +damageDealt)
+            console.log(statsPokemon[3])
+            console.log(moves[selectedMoveIndex].power)
+            console.log(statsOpponent[2])
+            console.log(multiplicadorPoke1)
             console.log(damageDealt)
             if (damageDealt > 150) {
                 content.text = "Golpe crítico!"
