@@ -134,7 +134,6 @@ const pokemons =[
     {name: "magikarp", sprite: "magikarp"},
     {name: "gyarados", sprite: "gyarados"},
     {name: "lapras", sprite: "lapras"},
-    {name: "ditto", sprite: "ditto"},
     {name: "eevee", sprite: "eevee"},
     {name: "vaporeon", sprite: "vaporeon"},
     {name: "jolteon", sprite: "jolteon"},

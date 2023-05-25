@@ -18,18 +18,17 @@ export default async function(pokemon, opponent) {
     const statsPokemon = await StatsPokemon(pokemon.name)
     console.log(statsPokemon)
     const typesUser = await GetType(pokemon.name)
-    const moves = await getPokemonMoves(pokemon.name)
-    console.log("movimiento " + moves[0].name)
-    console.log("movimiento2 " + moves[1].name)
-    console.log("movimiento3 " + moves[2].name)
-    console.log("potencia "+ moves[0].power)
-    //Segundo pokemon (oponente)
+    let moves = null
+    let moveNames = null
+    moves = await getPokemonMoves(pokemon.name)
+    moveNames = moves.map(move => move.name)
     console.log(opponent.name)
     const statsOpponent = await StatsPokemon(opponent.name)
     console.log(statsOpponent)
     const typesOpponent = await GetType(opponent.name)
-    const movesOpponent = await getPokemonMoves(opponent.name)
-    
+    let movesOpponent = null
+    movesOpponent = await getPokemonMoves(opponent.name)
+    let opponentMoveNames = movesOpponent.map(move => move.name);
     let multiplicadorPoke1 = await calculadorMultiplicador(typesUser, typesOpponent)
     let multiplicadorPoke2 = await calculadorMultiplicador(typesOpponent, typesUser)
 
@@ -40,8 +39,6 @@ export default async function(pokemon, opponent) {
     const lowerRect = add([rect(width(), height() / 2), pos(0, height() / 2), color(0, 0, 0), z(1)]);
     let selectedMoveIndex = 0;
     let phase = 'player-selection'
-    let moveNames = moves.map(move => move.name)
-    let opponentMoveNames = movesOpponent.map(move => move.name);
 
     function calculateDamage(attackerSpecialAttack, movePower, defenderDefense, multiplier, move) {
         if (move.damage_class.name === "special") {
@@ -178,7 +175,6 @@ export default async function(pokemon, opponent) {
     ])
 
     function reduceHealth(healthBar, damageDealt) {
-        console.log("reduce")
         tween(
             healthBar.width,
             healthBar.width - damageDealt,
@@ -233,11 +229,6 @@ export default async function(pokemon, opponent) {
             let selectedOpponentMove = opponentMoveNames[selectedOpponentMoveIndex];
             content.text = opponent.name.toUpperCase() + ' ha usado ' + selectedOpponentMove + '.';
             const damageDealt = calculateDamage(statsOpponent[3], movesOpponent[1].power, statsPokemon[2], multiplicadorPoke2, movesOpponent[selectedOpponentMoveIndex])
-            console.log(statsOpponent[3])
-            console.log(movesOpponent[selectedOpponentMoveIndex].power)
-            console.log(statsPokemon[2])
-            console.log(multiplicadorPoke2)
-            console.log(damageDealt)
             if (damageDealt > 150) {
                 content.text = "Golpe crítico!"
             }
@@ -251,12 +242,6 @@ export default async function(pokemon, opponent) {
 
         if (phase === 'player-turn') {
             const damageDealt = calculateDamage(statsPokemon[3],  moves[1].power, statsOpponent[2], multiplicadorPoke1, moves[selectedMoveIndex])
-            console.log("daño " +damageDealt)
-            console.log(statsPokemon[3])
-            console.log(moves[selectedMoveIndex].power)
-            console.log(statsOpponent[2])
-            console.log(multiplicadorPoke1)
-            console.log(damageDealt)
             if (damageDealt > 150) {
                 content.text = "Golpe crítico!"
             } else {

@@ -6,6 +6,7 @@ export async function PokemonList() {
         const results = data.results;
         const pokemonArray = await Promise.all(
         results.map(async pokemon => {
+            if (pokemon.name === 'ditto') return null;
             const pokemonResponse = await fetch(pokemon.url);
             const pokemonData = await pokemonResponse.json();
             const sprites = pokemonData.sprites;
@@ -18,8 +19,9 @@ export async function PokemonList() {
             };
           })
         );
+        const filteredPokemonArray = pokemonArray.filter(pokemon => pokemon !== null);
         //console.log(pokemonArray);
-        return pokemonArray;
+        return filteredPokemonArray;
       } catch (error) {
         throw new Error('Error fetching Pokemon list:', error);
       }
