@@ -196,7 +196,6 @@ export default async function(pokemon, opponent) {
             easings.easeInBounce
         )
     }
-    
 
     let phase = 'player-selection'
     let moveNames = moves.map(move => move.name)
@@ -204,14 +203,14 @@ export default async function(pokemon, opponent) {
     onKeyPress('up', () => {
         selectedMoveIndex = (selectedMoveIndex - 1 + moveNames.length) % moveNames.length;
         if (phase === 'player-selection' || phase === 'player-turn') {
-            content.text = moveNames.map((name, i) => (i === selectedMoveIndex ? '> ' : '  ') + name).join('\n');
+            content.text = moveNames.map((name, i) => (i === selectedMoveIndex ? '> ' : '  ') + name.toUpperCase()).join('\n');
         }
     });
     
     onKeyPress('down', () => {
         selectedMoveIndex = (selectedMoveIndex + 1) % moveNames.length;
         if (phase === 'player-selection' || phase === 'player-turn') {
-            content.text = moveNames.map((name, i) => (i === selectedMoveIndex ? '> ' : '  ') + name).join('\n');
+            content.text = moveNames.map((name, i) => (i === selectedMoveIndex ? '> ' : '  ') + name.toUpperCase()).join('\n');
         }
     });
     
@@ -219,7 +218,7 @@ export default async function(pokemon, opponent) {
         if (player.fainted || secondPlayer.fainted) return
 
         if (phase === 'player-selection') {
-            content.text = moveNames.map((name, i) => (i === selectedMoveIndex ? '> ' : '  ') + name).join('\n')
+            content.text = moveNames.map((name, i) => (i === selectedMoveIndex ? '> ' : '  ') + name.toUpperCase()).join('\n')
             phase = 'player-turn'
             return
         }
@@ -245,7 +244,7 @@ export default async function(pokemon, opponent) {
             if (damageDealt > 150) {
                 content.text = "Golpe crítico!"
             } else {
-                content.text = pokemon.name.toUpperCase() + ' ha usado ' + moveNames[selectedMoveIndex] + '.';
+                content.text = pokemon.name.toUpperCase() + ' ha usado ' + moveNames[selectedMoveIndex].toUpperCase() + '.';
             }
 
             reduceHealth(enemyHealthBar, damageDealt)
