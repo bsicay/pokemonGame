@@ -24,12 +24,24 @@ export async function PokemonList() {
         throw new Error('Error fetching Pokemon list:', error);
       }
 }
+async function getMoveDetails(url) {
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+}
 
 export async function StatsPokemon(name){
   try{
+    console.log("nombre " + name)
     const url = 'https://pokeapi.co/api/v2/pokemon/' + name + '/';
     const response = await fetch(url);
     const pokemonData = await response.json();
+    // const moves = pokemonData.moves;
+    // const detailedMoves = await Promise.all(moves.map(move => getMoveDetails(move.move.url)));
+    // const normalPhysicalMove  = detailedMoves.find(move => 
+    //   move.damage_class.name === 'physical' && move.type.name === 'normal'
+    // );
+    // console.log(normalPhysicalMove )
     const stats = pokemonData.stats;
     const finalStats = stats.map(stat => stat.base_stat);
     return(finalStats)
@@ -39,21 +51,57 @@ export async function StatsPokemon(name){
   }
 }
 
-// export async function GetType(name){
-//   try{
-//     const url = 'https://pokeapi.co/api/v2/pokemon/' + name + '/';
-//     const response = await fetch(url);
-//     const pokemonData = await response.json();
-//     const type = pokemonData.types;
-//     let finalTypes = []
-//     for(let i = 0; i<type.length; i++){
-//       finalTypes.push(type[i].type.name)
-//     }
-//     return finalTypes
-//   }catch(error){
-//     throw new Error('Error fetching Pokemon list:', error);
-//   }
-// }
+export async function getPokemonMoves(name) {
+  const response = await fetch('https://pokeapi.co/api/v2/pokemon/' + name);
+  const data = await response.json();
+  const moves = data.moves;
+
+  let detailedMoves = await Promise.all(moves.map(move => getMoveDetails(move.move.url)));
+
+  let normalPhysicalMove = detailedMoves.find(move => 
+      move.damage_class.name === 'physical' && 
+      move.type.name === 'normal'
+  );
+  if (normalPhysicalMove) {
+    detailedMoves = detailedMoves.filter(move => move !== normalPhysicalMove);
+  } else {
+    normalPhysicalMove = detailedMoves.find(move => move.type.name === 'normal');
+    if (normalPhysicalMove) {
+      detailedMoves = detailedMoves.filter(move => move !== normalPhysicalMove);
+    }
+  }
+
+  let specialTypeMove = detailedMoves.find(move => 
+    move.damage_class.name === 'special'
+  );
+
+  if (specialTypeMove) {
+    detailedMoves = detailedMoves.filter(move => move !== specialTypeMove);
+  } else {
+    specialTypeMove = detailedMoves.find(move => move.type.name === 'normal');
+    if (specialTypeMove) {
+      detailedMoves = detailedMoves.filter(move => move !== specialTypeMove);
+    }
+  }
+
+  let normalMove = detailedMoves.find(move => move.type.name === 'normal');
+
+  // Si no se encontró un movimiento normal, buscar cualquier movimiento
+  if (!normalMove && detailedMoves.length > 0) {
+    normalMove = detailedMoves[0];
+  }
+
+  if (!normalPhysicalMove && detailedMoves.length > 0) {
+    normalPhysicalMove = detailedMoves[0];
+  }
+
+  if (!specialTypeMove && detailedMoves.length > 0) {
+    specialTypeMove = detailedMoves[0];
+  }
+
+  return [normalPhysicalMove, specialTypeMove, normalMove];
+}
+
 
 
 export async function GetType(name){
