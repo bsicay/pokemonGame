@@ -12,13 +12,15 @@ Kaboom.js: Un motor de juegos JavaScript fácil de     usar y basado en lienzo q
 ![alt text](https://icons.veryicon.com/png/128/business/vscode-program-item-icon/javascript-3.png)
 - JavaScript: Un lenguaje de programación ampliamente utilizado tanto para el frontend como para el backend, utilizado para el Back-End.
 
-![alt text](https://createjs.com/docs/tweenjs/assets/docs-icon-TweenJS.png)
+<img src="https://createjs.com/docs/tweenjs/assets/docs-icon-TweenJS.png" width="210" height="120"> 
 - Tween.js: Una biblioteca JavaScript para crear animaciones suaves y fluidas.
+ 
 
 ![alt text](https://pipedream.com/s.v0/app_mvNhzR/logo/orig)
 - PokeAPI: Una API con todos los datos organizados de manera detallada sobre datos de cada Pokémon. 
 
-![alt text](https://raw.githubusercontent.com/axe-me/vite-plugin-node/HEAD/node-vite.png)
+
+<img src="https://raw.githubusercontent.com/axe-me/vite-plugin-node/HEAD/node-vite.png" width="210" height="190"> 
 - Vite: Herramienta de compilación que proporciona una experiencia de desarrollo mucho más rápida 
 
 
