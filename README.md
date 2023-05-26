@@ -15,6 +15,13 @@ Kaboom.js: Un motor de juegos JavaScript fácil de     usar y basado en lienzo q
 ![alt text](https://createjs.com/docs/tweenjs/assets/docs-icon-TweenJS.png)
 - Tween.js: Una biblioteca JavaScript para crear animaciones suaves y fluidas.
 
+![alt text](https://pipedream.com/s.v0/app_mvNhzR/logo/orig)
+- PokeAPI: Una API con todos los datos organizados de manera detallada sobre datos de cada Pokémon. 
+
+![alt text](https://raw.githubusercontent.com/axe-me/vite-plugin-node/HEAD/node-vite.png)
+- Vite: Herramienta de compilación que proporciona una experiencia de desarrollo mucho más rápida 
+
+
 ## Requisitos 📋
 
 - Tener un editor de códogo (Recomendado VIsualStudio Code)
