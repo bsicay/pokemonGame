@@ -5,6 +5,9 @@ Recreation of the pokémon turn-based fighting system
 
 ![alt text](https://cdn.discordapp.com/attachments/717418780065529856/1113508159928139838/image.png)
 
+## Demo
+https://pokemonbattlegame-c7b24.web.app/
+
 ## Tecnologías implementadas
 
 En este proyecto, se utilizaron las siguientes tecnologías:
