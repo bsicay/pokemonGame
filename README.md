@@ -1,6 +1,10 @@
 # pokemonGame 👾
 Recreation of the pokémon turn-based fighting system
 
+![alt text](https://cdn.discordapp.com/attachments/717418780065529856/1113507934790500402/image.png)
+
+![alt text](https://cdn.discordapp.com/attachments/717418780065529856/1113508159928139838/image.png)
+
 ## Tecnologías implementadas
 
 En este proyecto, se utilizaron las siguientes tecnologías:
